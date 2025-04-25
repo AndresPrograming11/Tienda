@@ -1,0 +1,159 @@
+.navbar-top {
+    width: calc(100% - 200px);
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background: rgb(255, 2, 2);
+    padding-top: 50px;
+}
+
+.nav-links-top {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    background: white;
+    width: 100%;
+    justify-content: space-around;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.nav-links-top a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-top .nav-links-top li button.tienda-seleccionada {
+    background: rgba(0, 0, 0, 0.4); 
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  .fondo-negro {
+    position: fixed;    
+    top: 39px;
+    right: 10px;
+    width: 40%;
+    height: 97.5%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 10;
+  }
+
+  /* Contenedor del item del carrito */
+
+  .titulo-carrito {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content:left; 
+    gap: 20px;
+    width: 80%;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;    
+}
+
+.titulo-carrito  h2{    
+    margin-left: 12%;
+     
+}
+
+
+.carrito-item {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 20px;
+  width: 80%;
+  margin: 0 auto 15px auto; /* ← centrado horizontal + separación abajo */
+  padding: 15px;
+  border-radius: 10px;
+}
+
+
+.carrito-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Contenedor de la información del producto */
+.info-carrito {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* Título del producto */
+.info-carrito h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Botón de talla */
+.talla-btn {
+    background: #ddd;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    width: fit-content;
+    cursor: default;
+}
+
+/* Contador de cantidad */
+.contador {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contador button {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Botón de eliminar */
+.borrar-btn {
+    background: #8f0a0a;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.carrito-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .cerrar-carrito {
+    background: none;
+    border-radius: 20px;
+    font-size: 20px;
+    color: rgb(5, 5, 5);
+    cursor: pointer;
+
+  }
