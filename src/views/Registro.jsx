@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/Registro.css";
 
+
 function Registro() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
@@ -9,12 +10,33 @@ function Registro() {
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = () => {
-    
-    console.log("Datos del usuario:", { nombre, correo, usuario, contraseña });
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost/carrito-backend/registro.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          correo: correo,
+          username: usuario,
+          password: contraseña,
+        }),
+      });
 
-   
-    navigate("/login");
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Registro exitoso");
+        navigate("/login");
+      } else {
+        alert(data.message || "Error al registrarse");
+      }
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      alert("Error de conexión con el servidor");
+    }
   };
 
   return (

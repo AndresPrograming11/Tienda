@@ -1,34 +1,35 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Importamos Link
+import { useNavigate, Link } from "react-router-dom";
 import "../style/login.css";
+import { loginUsuario } from "../services/login";
 
 function Login({ autentificar, setRole }) {
   const [Usuario, setUsuario] = useState("");
   const [Contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (Usuario === "admin" && Contraseña === "admin123") {
+  const handleLogin = async () => {
+    const res = await loginUsuario(Usuario, Contraseña);
+    if (res.success && res.role) {
       autentificar(true);
-      setRole("admin");
+      setRole(res.role);
       localStorage.setItem("isAuth", "true");
-      localStorage.setItem("role", "admin");
-      navigate("/admin");
-    } else if (Usuario === "user" && Contraseña === "user123") {
-      autentificar(true);
-      setRole("user");
-      localStorage.setItem("isAuth", "true");
-      localStorage.setItem("role", "user");
-      navigate("/");
+      localStorage.setItem("role", res.role);
+      navigate(res.role === "admin" ? "/admin" : "/");
     } else {
-      alert("Credenciales incorrectas");
+      alert(res.message || "Credenciales incorrectas");
     }
   };
+  
+  
 
   return (
     <div className="contenedor">
       <div className="imagen-container">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCVqZ6USYoOOVuZQfnOXIZyhjcI0zByB1m5rqf1t64acPmhU-LGbUvyZcl_cePadiOyxE&usqp=CAU" alt="logo universidad" />
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCVqZ6USYoOOVuZQfnOXIZyhjcI0zByB1m5rqf1t64acPmhU-LGbUvyZcl_cePadiOyxE&usqp=CAU"
+          alt="logo universidad"
+        />
       </div>
       <div className="formulario">
         <div className="mensaje">
@@ -36,13 +37,26 @@ function Login({ autentificar, setRole }) {
           <h1>Accede para conocer nuestros productos</h1>
         </div>
         <label className="label">Usuario</label>
-        <input type="text" placeholder="Usuario" onChange={(e) => setUsuario(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Usuario"
+          onChange={(e) => setUsuario(e.target.value)}
+        />
         <label className="label">Contraseña</label>
-        <input type="password" placeholder="Contraseña" onChange={(e) => setContraseña(e.target.value)} />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          onChange={(e) => setContraseña(e.target.value)}
+        />
         <button onClick={handleLogin}>Ingresar</button>
         <div className="informacion">
-          <h1>¿No tienes cuenta? <Link to="/registro">Registrarme</Link></h1>
-          <h1>¿Has olvidado tu contraseña? <Link to="/restablecerpass">Restablecer</Link></h1>
+          <h1>
+            ¿No tienes cuenta? <Link to="/registro">Registrarme</Link>
+          </h1>
+          <h1>
+            ¿Has olvidado tu contraseña?{" "}
+            <Link to="/restablecerpass">Restablecer</Link>
+          </h1>
         </div>
       </div>
     </div>
