@@ -1,17 +1,17 @@
-.camisas-container h1 {  
+.productos-container h1 {  
   padding-top: 60px;
 }
 
-.camisas-grid {
+.productos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px 0;
   width: calc(100% - 200px);
-  padding-left: 150px; 
+  margin-left: 150px; 
 }
 
-.camisa-card {
+.producto-card {
   background-color: #f4f4f4;
   padding: 15px;
   border-radius: 8px;
@@ -19,24 +19,24 @@
   text-align: center;
 }
 
-.camisa-img {
+.producto-img {
   width: 100px;
   height: 100px;
   border-radius: 4px;
   object-fit: cover;
 }
 
-.camisa-card h3 {
+.producto-card h3 {
   font-size: 18px;
   margin: 10px 0;
 }
 
-.camisa-card p {
+.producto-card p {
   font-size: 14px;
   color: #555;
 }
 
-
+/* ModalProducto */
 .modal-detalle {
   position: fixed;
   top: 0;
@@ -59,7 +59,6 @@
   position: relative;
   text-align: center;
 }
-
 
 .modal-cerrar {
   position: absolute;
@@ -84,7 +83,6 @@
   margin-bottom: 20px;
 }
 
-
 .descripcion-detalle {
   background-color: red;
   color: white;
@@ -104,7 +102,6 @@
   font-weight: normal;
   margin-top: 5px;
 }
-
 
 .control-detalle {
   display: flex;
@@ -139,6 +136,9 @@
   cursor: pointer;
 }
 
+.contador-detalle .seleccionada {
+  background-color: #3d2f9a;
+}
 
 .botones-detalle {
   display: flex;
@@ -158,30 +158,16 @@
   font-weight: bold;
 }
 
-
 @media (max-width: 768px) {
-  
-  .camisas-grid {
+  .productos-grid {
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    padding-left: 0; 
-  }
-
-  .camisas-container h1 {
-    padding-top: 30px; 
+    width: calc(100% - 200px);
   }
 }
 
-/* 📱 Media query para móviles */
 @media (max-width: 480px) {
-  
-  .camisas-grid {
+  .productos-grid {
     grid-template-columns: repeat(1, 1fr);
-    width: 100%;
-    padding-left: 0; 
-  }
-
-  .camisas-container h1 {
-    padding-top: 20px;
+    width: calc(100% - 200px);
   }
 }

@@ -12,10 +12,23 @@ import Registro from "../views/Registro";
 import RestablecerPass from "../views/Restablecerpass";
 import AdminUsuarios from "../views/AdminUsuarios";
 import AdminArticulos from "../views/AdminArticulos";
+import Ordenes from "../views/Ordenes";
+import Success from "../views/Sucess";
+import Cancel from "../views/Cancel";
+import CambiarClave from "../views/CambiarClave";
+
+
+
+function ProtectedRoute({ isAuth, role, allowedRoles, children }) {
+  if (!isAuth) return <Navigate to="/login" replace />;
+  if (allowedRoles && !allowedRoles.includes(role)) return <Navigate to="/login" replace />;
+  return children;
+}
 
 function AppRouter() {
-  const [isAuth, autentificar] = useState(false);  // Iniciar como 'false' para forzar login
+  const [isAuth, autentificar] = useState(false);
   const [role, setRole] = useState(localStorage.getItem("role") || "user");
+  const [carritoItems, setCarritoItems] = useState([]);
 
   const loguearse = () => {
     autentificar(false);
@@ -26,26 +39,31 @@ function AppRouter() {
 
   return (
     <Router>
-      {isAuth && <NavbarTop />}
+      {isAuth && <NavbarTop carritoItems={carritoItems} setCarritoItems={setCarritoItems} />}
       {isAuth && <Navbar loguearse={loguearse} role={role} />}
 
       <Routes>
-        {/* Pública */}
+        {/* Públicas */}
         <Route path="/login" element={<Login autentificar={autentificar} setRole={setRole} />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/restablecerpass" element={<RestablecerPass />} />
+        <Route path="/restablecerpass" element={<RestablecerPass />} />        
+        <Route path="/cambiarclave" element={<CambiarClave />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        <Route path="/ordenes" element={<Ordenes />} />
+       
 
-        {/* Usuario */}
+        {/* Usuario autenticado */}
         {isAuth && role === "user" && (
           <>
-            <Route path="/" element={<TodosLosProductos />} />
-            <Route path="/camisas" element={<Camisas />} />
-            <Route path="/pantalonesYSudaderas" element={<PantalonesYSudaderas />} />
-            <Route path="/uniformes" element={<Uniformes />} />
+            <Route path="/" element={<TodosLosProductos carritoItems={carritoItems} setCarritoItems={setCarritoItems} />}/>
+            <Route path="/camisas" element={<Camisas carritoItems={carritoItems} setCarritoItems={setCarritoItems} />} />
+            <Route path="/pantalonesYSudaderas" element={<PantalonesYSudaderas carritoItems={carritoItems} setCarritoItems={setCarritoItems} /> }/>
+            <Route path="/uniformes" element={<Uniformes carritoItems={carritoItems} setCarritoItems={setCarritoItems} />}/>
           </>
         )}
 
-        {/* Admin */}
+        {/* Admin autenticado */}
         {isAuth && role === "admin" && (
           <>
             <Route path="/admin" element={<AdminPanel />} />
@@ -54,8 +72,8 @@ function AppRouter() {
           </>
         )}
 
-        {/* Si no está autenticado, redirige todo al login */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        {/* Redirección para rutas no autorizadas o no autenticadas */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );

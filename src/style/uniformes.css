@@ -1,17 +1,19 @@
-.camisas-container h1 {  
-  padding-top: 60px;
+.uniformes-container h1 {  
+  margin-top:120px;
+  text-align: center;
 }
 
-.camisas-grid {
+.uniformes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 20px 0;
+  padding: 20px 0;  
   width: calc(100% - 200px);
-  padding-left: 150px; 
+  padding-left: 250px;
 }
 
-.camisa-card {
+
+.uniforme-card {
   background-color: #f4f4f4;
   padding: 15px;
   border-radius: 8px;
@@ -19,19 +21,19 @@
   text-align: center;
 }
 
-.camisa-img {
+.uniforme-img {
   width: 100px;
   height: 100px;
   border-radius: 4px;
   object-fit: cover;
 }
 
-.camisa-card h3 {
+.uniforme-card h3 {
   font-size: 18px;
   margin: 10px 0;
 }
 
-.camisa-card p {
+.uniforme-card p {
   font-size: 14px;
   color: #555;
 }
@@ -50,6 +52,7 @@
   align-items: center;
 }
 
+
 .modal-contenido {
   background: white;
   width: 90%;
@@ -60,7 +63,6 @@
   text-align: center;
 }
 
-
 .modal-cerrar {
   position: absolute;
   top: 15px;
@@ -70,6 +72,7 @@
   border: none;
   cursor: pointer;
 }
+
 
 .modal-contenido h2 {
   font-size: 26px;
@@ -139,7 +142,6 @@
   cursor: pointer;
 }
 
-
 .botones-detalle {
   display: flex;
   justify-content: center;
@@ -157,31 +159,25 @@
   cursor: pointer;
   font-weight: bold;
 }
-
-
 @media (max-width: 768px) {
-  
-  .camisas-grid {
+  .uniformes-grid {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
-    padding-left: 0; 
+    padding-left:137px;
   }
 
-  .camisas-container h1 {
+  .uniformes-container h1 {
     padding-top: 30px; 
   }
 }
 
-/* 📱 Media query para móviles */
 @media (max-width: 480px) {
-  
-  .camisas-grid {
+  .uniformes-grid {
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
-    padding-left: 0; 
+    padding-left:130px;
   }
-
-  .camisas-container h1 {
-    padding-top: 20px;
+  .uniformes-container h1 {
+    padding-top: 20px; 
   }
 }
